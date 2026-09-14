@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const db = require("./db");
 
 const authRoutes = require("./routes/auth");
 const skillsRoutes = require("./routes/skills");
@@ -52,10 +53,15 @@ app.use("/api", sessionsRoutes);
 
 const PORT = 5000;
 
-app.listen(PORT, () => {
-
-    console.log(
-        `🚀 Server running at http://localhost:${PORT}`
-    );
-
-});
+db.ready
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(
+                `🚀 Server running at http://localhost:${PORT}`
+            );
+        });
+    })
+    .catch((err) => {
+        console.error("❌ Server startup aborted because the database is not ready:", err.message);
+        process.exitCode = 1;
+    });
