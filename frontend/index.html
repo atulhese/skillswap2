@@ -1215,6 +1215,163 @@
 
         }
 
+        /* ================================================= */
+        /* SKILLSWAP PRODUCT REFRESH */
+        /* ================================================= */
+        :root {
+            --primary: #3157d5;
+            --primary-dark: #18358f;
+            --secondary: #13a981;
+            --bg: #f6f8fc;
+            --card: #ffffff;
+            --text: #16213d;
+            --muted: #68738c;
+            --border: #e4e9f2;
+            --shadow: 0 18px 50px rgba(33, 52, 105, .08);
+        }
+
+        body {
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: linear-gradient(180deg, #f8faff 0%, #f4f7fb 100%);
+            letter-spacing: -.01em;
+        }
+
+        #authPage {
+            position: relative;
+            min-height: 100vh;
+            background: #fff;
+        }
+
+        #authPage::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 72% 10%, rgba(49,87,213,.08), transparent 28%), radial-gradient(circle at 10% 95%, rgba(19,169,129,.08), transparent 24%);
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 42px clamp(28px, 7vw, 112px);
+            background: linear-gradient(145deg, #142b73 0%, #3157d5 58%, #4c73e7 100%);
+            justify-content: flex-start;
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            right: -180px;
+            bottom: -180px;
+            border: 1px solid rgba(255,255,255,.22);
+            border-radius: 50%;
+            box-shadow: 0 0 0 34px rgba(255,255,255,.04), 0 0 0 70px rgba(255,255,255,.03);
+        }
+
+        .logo {
+            margin-bottom: auto;
+            font-size: 25px;
+            letter-spacing: -.04em;
+        }
+
+        .landing-nav {
+            position: absolute;
+            top: 28px;
+            right: clamp(28px, 7vw, 112px);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2;
+        }
+
+        .landing-link, .landing-cta {
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .landing-link { color: rgba(255,255,255,.86); padding: 11px 10px; }
+        .landing-cta { color: #18358f; background: #fff; border-radius: 10px; padding: 11px 15px; box-shadow: 0 8px 18px rgba(12,31,91,.18); }
+        .landing-cta:hover, .landing-link:hover { opacity: .86; }
+
+        .hero-copy {
+            max-width: 600px;
+            margin: auto 0;
+            padding: 72px 0 44px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            color: #b8f8e4;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 22px;
+            height: 2px;
+            background: currentColor;
+        }
+
+        .hero h1 { max-width: 610px; font-size: clamp(42px, 5vw, 70px); letter-spacing: -.055em; }
+        .hero p { max-width: 530px; color: rgba(255,255,255,.82); font-size: 17px; line-height: 1.65; }
+
+        .feature-list { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 30px; gap: 10px; }
+        .feature { width: auto; padding: 13px 15px; border-radius: 12px; background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.16); font-size: 13px; color: rgba(255,255,255,.92); }
+
+        .auth-panel { position: relative; z-index: 1; padding: 48px clamp(28px, 7vw, 96px); background: rgba(255,255,255,.86); }
+        .auth-box { width: min(405px, 100%); }
+        .auth-box h2 { font-size: 34px; letter-spacing: -.045em; }
+        .auth-box > p { line-height: 1.55; }
+        .tabs { border: 1px solid var(--border); background: #f5f7fb; }
+        .tab { padding: 13px; }
+        .btn { border-radius: 11px; box-shadow: 0 5px 14px rgba(30,45,95,.08); }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), #4e72e3); }
+        .btn-primary:hover { box-shadow: 0 9px 20px rgba(49,87,213,.25); }
+        input, select, textarea { border-radius: 11px; background: #fbfcfe; }
+
+        .topbar { height: 78px; padding: 0 clamp(18px, 3vw, 42px); box-shadow: 0 1px 0 rgba(21,35,78,.03); }
+        .topbar .brand { letter-spacing: -.05em; }
+        .layout { grid-template-columns: 248px 1fr; }
+        .sidebar { padding: 26px 15px; background: rgba(255,255,255,.82); }
+        .sidebar::before { content: "YOUR WORKSPACE"; display: block; padding: 0 16px 12px; color: #9aa4b8; font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+        .nav-btn { border: 1px solid transparent; padding: 13px 16px; }
+        .nav-btn:hover, .nav-btn.active { border-color: #dce3ff; background: #f1f4ff; }
+        main { padding: clamp(24px, 4vw, 48px); }
+        .api-badge { border: 1px solid #dfeee9; background: #f2fbf8; }
+        .page-title { font-size: clamp(28px, 3vw, 38px); letter-spacing: -.045em; }
+        .page-subtitle { max-width: 680px; line-height: 1.6; }
+        .stat-card, .card { border-color: rgba(224,230,241,.95); border-radius: 18px; box-shadow: var(--shadow); }
+        .stat-card { position: relative; overflow: hidden; padding: 22px; }
+        .stat-card::after { content: ""; position: absolute; right: -20px; top: -30px; width: 90px; height: 90px; border-radius: 50%; background: #f0f3ff; }
+        .stat-value { position: relative; z-index: 1; color: var(--primary-dark); }
+        .card { padding: 26px; }
+        .card h3 { letter-spacing: -.025em; }
+        .list-item { border-color: #e6ebf3; background: #fcfdff; }
+        .list-item:hover { border-color: #cbd6fa; box-shadow: 0 8px 20px rgba(49,87,213,.06); }
+        .accepted-swap-card { border-left-width: 5px; }
+        .notice { border-radius: 14px; }
+        .site-footer { padding: 18px 0 6px; color: #8b95aa; text-align: center; font-size: 12px; }
+        .site-footer strong { color: #53617b; }
+
+        @media (max-width: 900px) {
+            .hero-copy { padding-top: 55px; }
+            .sidebar::before { display: none; }
+        }
+        @media (max-width: 560px) {
+            .hero-copy { padding: 45px 0 30px; }
+            .feature-list { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 44px; }
+        }
     </style>
 
 </head>
@@ -1231,62 +1388,27 @@
 
     <div class="hero">
 
-        <div class="logo">
+        <nav class="landing-nav" aria-label="Account navigation">
+            <a href="#authPanel" class="landing-link">Log in</a>
+            <a href="#authPanel" class="landing-cta">Create account</a>
+        </nav>
 
-            Skill<span>Swap</span>
+        <div class="logo">Skill<span>Swap</span></div>
 
-        </div>
+        <div class="hero-copy">
+            <div class="eyebrow">Peer-powered learning</div>
+            <h1>Trade what you know for what you want to learn.</h1>
+            <p>
+                SkillSwap makes it easy to find a thoughtful match, agree on the exchange,
+                and keep every conversation and learning session in one calm workspace.
+            </p>
 
-
-        <h1>
-
-            Learn a skill.
-
-            Teach a skill.
-
-            Grow together.
-
-        </h1>
-
-
-        <p>
-
-            Connect with people who have the skills you want
-            to learn and exchange your knowledge through a
-            simple skill swapping platform.
-
-        </p>
-
-
-        <div class="feature-list">
-
-            <div class="feature">
-
-                🔁 Find two-way skill matches
-
+            <div class="feature-list">
+                <div class="feature">Find two-way skill matches</div>
+                <div class="feature">Offer skills and request new ones</div>
+                <div class="feature">Chat with accepted partners</div>
+                <div class="feature">Schedule sessions with Meet links</div>
             </div>
-
-
-            <div class="feature">
-
-                🎯 Offer skills and request new skills
-
-            </div>
-
-
-            <div class="feature">
-
-                🤝 Send, accept and manage swap requests
-
-            </div>
-
-
-            <div class="feature">
-
-                🚀 Track active and completed swaps
-
-            </div>
-
         </div>
 
     </div>
@@ -1294,7 +1416,7 @@
 
     <!-- AUTH PANEL -->
 
-    <div class="auth-panel">
+    <div class="auth-panel" id="authPanel">
 
         <div class="auth-box">
 
@@ -2485,6 +2607,8 @@
         </main>
 
     </div>
+
+    <footer class="site-footer">Created by <strong>Team Spider</strong> — we make skill swaps, not spider webs.</footer>
 
 </section>
 
