@@ -1,0 +1,4984 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillSwap | Exchange Knowledge</title>
+
+
+    <style>
+
+        :root {
+
+            --primary: #5b5ce2;
+            --primary-dark: #4142b8;
+            --secondary: #19b98c;
+
+            --bg: #f5f7fb;
+            --card: #ffffff;
+
+            --text: #1e2433;
+            --muted: #70778a;
+
+            --border: #e7eaf1;
+
+            --danger: #e55353;
+            --warning: #f0a13a;
+
+        }
+
+
+        * {
+
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+
+        }
+
+
+        body {
+
+            font-family: Inter, Arial, sans-serif;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+        }
+
+
+        .hidden {
+
+            display: none !important;
+
+        }
+
+
+        /* ================================================= */
+        /* AUTH PAGE */
+        /* ================================================= */
+
+        #authPage {
+
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns: 1.1fr 0.9fr;
+
+        }
+
+
+        .hero {
+
+            padding: 70px 9%;
+
+            color: white;
+
+            background:
+
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(255,255,255,.16),
+                    transparent 28%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #5b5ce2,
+                    #272881
+                );
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+        }
+
+
+        .logo {
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            margin-bottom: 70px;
+
+        }
+
+
+        .logo span {
+
+            color: #82f2cf;
+
+        }
+
+
+        .hero h1 {
+
+            font-size: clamp(42px, 5vw, 68px);
+
+            line-height: 1.05;
+
+            max-width: 650px;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .hero p {
+
+            max-width: 570px;
+
+            font-size: 19px;
+
+            line-height: 1.7;
+
+            opacity: .9;
+
+        }
+
+
+        .feature-list {
+
+            margin-top: 40px;
+
+            display: grid;
+
+            gap: 14px;
+
+        }
+
+
+        .feature {
+
+            background: rgba(255,255,255,.1);
+
+            border: 1px solid rgba(255,255,255,.15);
+
+            border-radius: 14px;
+
+            padding: 15px 18px;
+
+            width: fit-content;
+
+        }
+
+
+        /* ================================================= */
+        /* AUTH PANEL */
+        /* ================================================= */
+
+        .auth-panel {
+
+            background: white;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 35px;
+
+        }
+
+
+        .auth-box {
+
+            width: min(430px, 100%);
+
+        }
+
+
+        .auth-box h2 {
+
+            font-size: 32px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .auth-box > p {
+
+            color: var(--muted);
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .tabs {
+
+            display: flex;
+
+            background: #f2f3f8;
+
+            border-radius: 12px;
+
+            padding: 5px;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .tab {
+
+            flex: 1;
+
+            border: none;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            background: transparent;
+
+            font-weight: 700;
+
+            color: var(--muted);
+
+        }
+
+
+        .tab.active {
+
+            background: white;
+
+            color: var(--primary);
+
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+
+        }
+
+
+        .form {
+
+            display: grid;
+
+            gap: 15px;
+
+        }
+
+
+        .field label {
+
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        input,
+        select,
+        textarea {
+
+            width: 100%;
+
+            border: 1px solid var(--border);
+
+            border-radius: 10px;
+
+            padding: 13px 14px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            background: white;
+
+        }
+
+
+        input:focus,
+        select:focus {
+
+            border-color: var(--primary);
+
+            box-shadow: 0 0 0 3px rgba(91,92,226,.1);
+
+        }
+
+
+        /* ================================================= */
+        /* BUTTONS */
+        /* ================================================= */
+
+        .btn {
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 13px 18px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: .2s;
+
+        }
+
+
+        .btn:hover {
+
+            transform: translateY(-1px);
+
+        }
+
+
+        .btn-primary {
+
+            background: var(--primary);
+
+            color: white;
+
+        }
+
+
+        .btn-success {
+
+            background: var(--secondary);
+
+            color: white;
+
+        }
+
+
+        .btn-danger {
+
+            background: var(--danger);
+
+            color: white;
+
+        }
+
+
+        .btn-light {
+
+            background: #eef0f6;
+
+            color: var(--text);
+
+        }
+
+
+        /* ================================================= */
+        /* DASHBOARD */
+        /* ================================================= */
+
+        #dashboard {
+
+            min-height: 100vh;
+
+        }
+
+
+        .topbar {
+
+            height: 72px;
+
+            background: white;
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 30px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 5;
+
+        }
+
+
+        .topbar .brand {
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+            color: var(--primary);
+
+        }
+
+
+        .user-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+        }
+
+
+        .avatar {
+
+            width: 42px;
+
+            height: 42px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    #8a70e7
+                );
+
+            color: white;
+
+            border-radius: 50%;
+
+            display: grid;
+
+            place-items: center;
+
+            font-weight: 800;
+
+        }
+
+
+        .layout {
+
+            display: grid;
+
+            grid-template-columns: 235px 1fr;
+
+            min-height: calc(100vh - 72px);
+
+        }
+
+
+        .sidebar {
+
+            background: white;
+
+            border-right: 1px solid var(--border);
+
+            padding: 24px 14px;
+
+        }
+
+
+        .nav-btn {
+
+            width: 100%;
+
+            text-align: left;
+
+            border: none;
+
+            background: transparent;
+
+            padding: 14px 16px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            color: var(--muted);
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .nav-btn:hover,
+        .nav-btn.active {
+
+            background: #efefff;
+
+            color: var(--primary);
+
+        }
+
+
+        main {
+
+            padding: 32px;
+
+            max-width: 1450px;
+
+            width: 100%;
+
+            margin: auto;
+
+        }
+
+
+        .page-title {
+
+            font-size: 30px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .page-subtitle {
+
+            color: var(--muted);
+
+            margin-bottom: 28px;
+
+        }
+
+
+        /* ================================================= */
+        /* STATS */
+        /* ================================================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .stat-card,
+        .card {
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 25px rgba(28,37,65,.04);
+
+        }
+
+
+        .stat-card {
+
+            padding: 22px;
+
+        }
+
+
+        .stat-label {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+        }
+
+
+        .stat-value {
+
+            font-size: 31px;
+
+            font-weight: 800;
+
+            margin-top: 7px;
+
+        }
+
+
+        .grid-2 {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+
+        }
+
+
+        .card {
+
+            padding: 22px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .card h3 {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        /* ================================================= */
+        /* SKILLS */
+        /* ================================================= */
+
+        .skill-list {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+        }
+
+
+        .skill-pill {
+
+            padding: 9px 13px;
+
+            background: #f0f1ff;
+
+            color: var(--primary);
+
+            border-radius: 999px;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+        }
+
+
+        .skill-pill.want {
+
+            background: #e8faf4;
+
+            color: #13815f;
+
+        }
+
+
+        .empty {
+
+            color: var(--muted);
+
+            padding: 18px 0;
+
+        }
+
+
+        /* ================================================= */
+        /* LIST */
+        /* ================================================= */
+
+        .list {
+
+            display: grid;
+
+            gap: 12px;
+
+        }
+
+
+        .list-item {
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 16px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 16px;
+
+        }
+
+
+        .list-item h4 {
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .list-item p {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+        }
+
+
+        .status {
+
+            padding: 6px 10px;
+
+            border-radius: 999px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            background: #fff4df;
+
+            color: #a56800;
+
+            display: inline-block;
+
+        }
+
+
+        .status.ACCEPTED {
+
+            background: #e6f8f1;
+
+            color: #16795b;
+
+        }
+
+
+        .status.REJECTED {
+
+            background: #fdeaea;
+
+            color: #bb3333;
+
+        }
+
+
+        .status.COMPLETED {
+
+            background: #eef0f5;
+
+            color: #5c6475;
+
+        }
+
+
+        .status.PENDING {
+
+            background: #fff4df;
+
+            color: #a56800;
+
+        }
+
+
+        .status.SCHEDULED {
+
+            background: #fff4df;
+
+            color: #a56800;
+
+        }
+
+
+        .status.CANCELLED {
+
+            background: #fdeaea;
+
+            color: #bb3333;
+
+        }
+
+
+        .actions {
+
+            display: flex;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        /* ================================================= */
+        /* NOTICE */
+        /* ================================================= */
+
+        .notice {
+
+            position: fixed;
+
+            right: 24px;
+
+            bottom: 24px;
+
+            color: white;
+
+            padding: 14px 18px;
+
+            border-radius: 12px;
+
+            background: #222b45;
+
+            box-shadow:
+                0 12px 35px rgba(0,0,0,.2);
+
+            z-index: 20;
+
+            display: none;
+
+        }
+
+
+        .notice.error {
+
+            background: var(--danger);
+
+        }
+
+
+        .notice.success {
+
+            background: var(--secondary);
+
+        }
+
+
+        .api-badge {
+
+            display: inline-flex;
+
+            gap: 8px;
+
+            align-items: center;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            background: #f4f6fa;
+
+            padding: 7px 10px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .dot {
+
+            width: 8px;
+
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #bbb;
+
+        }
+
+
+        .dot.online {
+
+            background: var(--secondary);
+
+        }
+
+
+        .section {
+
+            display: none;
+
+        }
+
+
+        .section.active {
+
+            display: block;
+
+        }
+
+
+        .small-form {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr auto;
+
+            gap: 12px;
+
+            align-items: end;
+
+        }
+
+
+        .full-form {
+
+            display: grid;
+
+            gap: 14px;
+
+        }
+
+
+        .swap-details {
+
+            margin-top: 12px;
+
+            padding: 12px;
+
+            background: #f7f8fc;
+
+            border-radius: 10px;
+
+        }
+
+
+        .swap-details p {
+
+            margin: 5px 0;
+
+        }
+
+
+        /* ================================================= */
+        /* MESSAGES / CHAT */
+        /* ================================================= */
+
+        .conversation-item {
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            cursor: pointer;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .conversation-item:hover,
+        .conversation-item.active {
+
+            border-color: var(--primary);
+
+            background: #f7f7ff;
+
+        }
+
+
+        .conversation-item h4 {
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .conversation-item p {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        .chat-window {
+
+            max-height: 420px;
+
+            overflow-y: auto;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+            margin-bottom: 16px;
+
+            padding-right: 4px;
+
+        }
+
+
+        .chat-bubble {
+
+            padding: 10px 14px;
+
+            border-radius: 14px;
+
+            max-width: 75%;
+
+            font-size: 14px;
+
+        }
+
+
+        .chat-bubble.mine {
+
+            align-self: flex-end;
+
+            background: var(--primary);
+
+            color: white;
+
+        }
+
+
+        .chat-bubble.theirs {
+
+            align-self: flex-start;
+
+            background: #f0f1ff;
+
+            color: var(--text);
+
+        }
+
+
+        .chat-bubble .time {
+
+            font-size: 11px;
+
+            opacity: .7;
+
+            margin-top: 4px;
+
+        }
+
+
+        /* ================================================= */
+        /* RESPONSIVE */
+        /* ================================================= */
+
+        @media (max-width: 900px) {
+
+            #authPage {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .hero {
+
+                padding: 45px 8%;
+
+            }
+
+
+            .logo {
+
+                margin-bottom: 45px;
+
+            }
+
+
+            .layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .sidebar {
+
+                display: flex;
+
+                overflow-x: auto;
+
+                border-right: none;
+
+                border-bottom: 1px solid var(--border);
+
+            }
+
+
+            .nav-btn {
+
+                width: auto;
+
+                white-space: nowrap;
+
+            }
+
+
+            .stats {
+
+                grid-template-columns: repeat(2, 1fr);
+
+            }
+
+
+            .grid-2 {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 560px) {
+
+            main {
+
+                padding: 20px 14px;
+
+            }
+
+
+            .topbar {
+
+                padding: 0 15px;
+
+            }
+
+
+            .stats {
+
+                grid-template-columns: 1fr 1fr;
+
+                gap: 10px;
+
+            }
+
+
+            .small-form {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .user-info > div:nth-child(2) {
+
+                display: none;
+
+            }
+
+
+            .list-item {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ===================================================== -->
+<!-- AUTH / STARTING HOMEPAGE -->
+<!-- ===================================================== -->
+
+<section id="authPage">
+
+    <div class="hero">
+
+        <div class="logo">
+
+            Skill<span>Swap</span>
+
+        </div>
+
+
+        <h1>
+
+            Learn a skill.
+
+            Teach a skill.
+
+            Grow together.
+
+        </h1>
+
+
+        <p>
+
+            Connect with people who have the skills you want
+            to learn and exchange your knowledge through a
+            simple skill swapping platform.
+
+        </p>
+
+
+        <div class="feature-list">
+
+            <div class="feature">
+
+                🔁 Find two-way skill matches
+
+            </div>
+
+
+            <div class="feature">
+
+                🎯 Offer skills and request new skills
+
+            </div>
+
+
+            <div class="feature">
+
+                🤝 Send, accept and manage swap requests
+
+            </div>
+
+
+            <div class="feature">
+
+                🚀 Track active and completed swaps
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- AUTH PANEL -->
+
+    <div class="auth-panel">
+
+        <div class="auth-box">
+
+            <h2 id="authTitle">
+
+                Welcome back
+
+            </h2>
+
+
+            <p id="authText">
+
+                Login to continue your skill exchange journey.
+
+            </p>
+
+
+            <div class="tabs">
+
+                <button
+                    class="tab active"
+                    id="loginTab"
+                    type="button">
+
+                    Login
+
+                </button>
+
+
+                <button
+                    class="tab"
+                    id="registerTab"
+                    type="button">
+
+                    Register
+
+                </button>
+
+            </div>
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm" class="form">
+
+                <div class="field">
+
+                    <label>
+
+                        Email
+
+                    </label>
+
+
+                    <input
+                        id="loginEmail"
+                        type="email"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+
+                        Password
+
+                    </label>
+
+
+                    <input
+                        id="loginPassword"
+                        type="password"
+                        placeholder="Enter your password"
+                        required>
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary"
+                    type="submit">
+
+                    Login to SkillSwap
+
+                </button>
+
+            </form>
+
+
+            <!-- REGISTER FORM -->
+
+            <form
+                id="registerForm"
+                class="form hidden">
+
+                <div class="field">
+
+                    <label>
+
+                        Full Name
+
+                    </label>
+
+
+                    <input
+                        id="registerName"
+                        type="text"
+                        placeholder="Enter your name"
+                        required>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+
+                        Email
+
+                    </label>
+
+
+                    <input
+                        id="registerEmail"
+                        type="email"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+
+                        Phone Number
+
+                    </label>
+
+
+                    <input
+                        id="registerPhone"
+                        type="tel"
+                        placeholder="Enter your phone number"
+                        required>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+
+                        Password
+
+                    </label>
+
+
+                    <input
+                        id="registerPassword"
+                        type="password"
+                        placeholder="Create password"
+                        required>
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary"
+                    type="submit">
+
+                    Create Account
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- DASHBOARD -->
+<!-- ===================================================== -->
+
+<section id="dashboard" class="hidden">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            SkillSwap
+
+        </div>
+
+
+        <div class="user-info">
+
+            <div>
+
+                <strong id="topUserName">
+
+                    User
+
+                </strong>
+
+                <br>
+
+                <small id="topUserEmail"></small>
+
+            </div>
+
+
+            <div
+                class="avatar"
+                id="avatar">
+
+                U
+
+            </div>
+
+
+            <button
+                class="btn btn-light"
+                id="logoutBtn"
+                type="button">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <div class="layout">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+
+            <button
+                class="nav-btn active"
+                data-page="home"
+                type="button">
+
+                🏠 Dashboard
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="skills"
+                type="button">
+
+                🧠 My Skills
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="matches"
+                type="button">
+
+                ✨ Find Matches
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="requests"
+                type="button">
+
+                📨 Swap Requests
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="swaps"
+                type="button">
+
+                🔁 Active Swaps
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="messages"
+                type="button">
+
+                💬 Messages
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                data-page="sessions"
+                type="button">
+
+                📅 Sessions
+
+            </button>
+
+
+        </aside>
+
+
+
+        <!-- MAIN CONTENT -->
+
+        <main>
+
+
+            <div class="api-badge">
+
+                <span class="dot online"></span>
+
+                Backend API:
+
+                <strong>
+
+                    http://localhost:5000
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- ================================================= -->
+            <!-- DASHBOARD HOME -->
+            <!-- ================================================= -->
+
+            <section
+                id="home"
+                class="section active">
+
+
+                <h1 class="page-title">
+
+                    Welcome,
+
+                    <span id="welcomeName">
+
+                        User
+
+                    </span>
+
+                    👋
+
+                </h1>
+
+
+                <p class="page-subtitle">
+
+                    Manage your skills and discover people
+                    to learn from.
+
+                </p>
+
+
+
+                <!-- STATS -->
+
+                <div class="stats">
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-label">
+
+                            Skills I Offer
+
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="offerCount">
+
+                            0
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-label">
+
+                            Skills I Want
+
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="wantCount">
+
+                            0
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-label">
+
+                            Received Requests
+
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="requestCount">
+
+                            0
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-label">
+
+                            Active Swaps
+
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="swapCount">
+
+                            0
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="grid-2">
+
+
+                    <div class="card">
+
+                        <h3>
+
+                            Skills I Offer
+
+                        </h3>
+
+
+                        <div
+                            id="dashboardOffers"
+                            class="skill-list">
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="card">
+
+                        <h3>
+
+                            Skills I Want to Learn
+
+                        </h3>
+
+
+                        <div
+                            id="dashboardWants"
+                            class="skill-list">
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================= -->
+            <!-- MY SKILLS -->
+            <!-- ================================================= -->
+
+            <section
+                id="skills"
+                class="section">
+
+
+                <h1 class="page-title">
+
+                    My Skills
+
+                </h1>
+
+
+                <p class="page-subtitle">
+
+                    Add skills you can teach or skills
+                    you want to learn.
+
+                </p>
+
+
+
+                <div class="card">
+
+                    <h3>
+
+                        Add a Skill
+
+                    </h3>
+
+
+                    <form
+                        id="addSkillForm"
+                        class="small-form">
+
+
+                        <div class="field">
+
+                            <label>
+
+                                Select Skill
+
+                            </label>
+
+
+                            <select
+                                id="skillSelect"
+                                required>
+
+                                <option value="">
+
+                                    Loading skills...
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="field">
+
+                            <label>
+
+                                Skill Type
+
+                            </label>
+
+
+                            <select
+                                id="skillType"
+                                required>
+
+                                <option value="OFFER">
+
+                                    I can teach this
+
+                                </option>
+
+
+                                <option value="WANT">
+
+                                    I want to learn this
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <button
+                            class="btn btn-primary"
+                            type="submit">
+
+                            Add Skill
+
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+
+
+                <div class="grid-2">
+
+
+                    <div class="card">
+
+                        <h3>
+
+                            What I Can Teach
+
+                        </h3>
+
+
+                        <div
+                            id="offerSkills"
+                            class="skill-list">
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="card">
+
+                        <h3>
+
+                            What I Want to Learn
+
+                        </h3>
+
+
+                        <div
+                            id="wantSkills"
+                            class="skill-list">
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================= -->
+            <!-- FIND MATCHES -->
+            <!-- ================================================= -->
+
+            <section
+                id="matches"
+                class="section">
+
+
+                <h1 class="page-title">
+
+                    Perfect Skill Matches
+
+                </h1>
+
+
+                <p class="page-subtitle">
+
+                    Users who can teach you something while
+                    learning a skill from you.
+
+                </p>
+
+
+
+                <div class="card">
+
+                    <h3>
+
+                        Suggested Matches
+
+                    </h3>
+
+
+                    <div
+                        id="matchList"
+                        class="list">
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <h3>
+
+                        Send a Swap Request
+
+                    </h3>
+
+
+                    <p class="page-subtitle">
+
+                        Select the user and skills for your
+                        skill exchange.
+
+                    </p>
+
+
+                    <form
+                        id="sendRequestForm"
+                        class="full-form">
+
+
+                        <div class="field">
+
+                            <label>
+
+                                Receiver User ID
+
+                            </label>
+
+
+                            <input
+                                id="receiverId"
+                                type="number"
+                                placeholder="Example: 2"
+                                required>
+
+                        </div>
+
+
+
+                        <div class="field">
+
+                            <label>
+
+                                Skill You Offer
+
+                            </label>
+
+
+                            <select
+                                id="offeredSkillSelect"
+                                required>
+
+                                <option value="">
+
+                                    Select skill
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="field">
+
+                            <label>
+
+                                Skill You Want
+
+                            </label>
+
+
+                            <select
+                                id="requestedSkillSelect"
+                                required>
+
+                                <option value="">
+
+                                    Select skill
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <button
+                            class="btn btn-primary"
+                            type="submit">
+
+                            Send Swap Request
+
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================= -->
+            <!-- SWAP REQUESTS -->
+            <!-- ================================================= -->
+
+            <section
+                id="requests"
+                class="section">
+
+
+                <h1 class="page-title">
+
+                    Swap Requests
+
+                </h1>
+
+
+                <p class="page-subtitle">
+
+                    Accept or reject incoming skill
+                    exchange requests.
+
+                </p>
+
+
+
+                <div class="card">
+
+                    <div
+                        id="requestList"
+                        class="list">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================= -->
+            <!-- ACTIVE SWAPS -->
+            <!-- ================================================= -->
+
+            <section
+                id="swaps"
+                class="section">
+
+
+                <h1 class="page-title">
+
+                    Active Swaps
+
+                </h1>
+
+
+                <p class="page-subtitle">
+
+                    View your accepted and completed
+                    skill exchanges.
+
+                </p>
+
+
+
+                <div class="card">
+
+                    <div
+                        id="swapList"
+                        class="list">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================= -->
+            <!-- MESSAGES -->
+            <!-- ================================================= -->
+
+            <section
+                id="messages"
+                class="section">
+
+
+                <h1 class="page-title">
+
+                    Messages
+
+                </h1>
+
+
+                <p class="page-subtitle">
+
+                    Chat with your skill swap partners.
+
+                </p>
+
+
+
+                <div class="grid-2">
+
+
+                    <div class="card">
+
+                        <h3>
+
+                            Conversations
+
+                        </h3>
+
+
+                        <div
+                            id="conversationList"
+                            class="list">
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="card">
+
+                        <h3 id="chatTitle">
+
+                            Select a conversation
+
+                        </h3>
+
+
+                        <div
+                            id="chatMessages"
+                            class="chat-window">
+
+                            <div class="empty">
+
+                                Choose a conversation on the left, or
+                                start a new one below.
+
+                            </div>
+
+                        </div>
+
+
+                        <form
+                            id="sendMessageForm"
+                            class="full-form">
+
+
+                            <div class="field">
+
+                                <label>
+
+                                    Receiver User ID
+
+                                </label>
+
+
+                                <input
+                                    id="receiverIdInput"
+                                    type="number"
+                                    placeholder="Example: 2"
+                                    required>
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>
+
+                                    Message
+
+                                </label>
+
+
+                                <input
+                                    id="messageTextInput"
+                                    type="text"
+                                    placeholder="Type your message..."
+                                    required>
+
+                            </div>
+
+
+                            <button
+                                class="btn btn-primary"
+                                type="submit">
+
+                                Send Message
+
+                            </button>
+
+
+                        </form>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================= -->
+            <!-- SESSIONS -->
+            <!-- ================================================= -->
+
+            <section
+                id="sessions"
+                class="section">
+
+
+                <h1 class="page-title">
+
+                    Sessions
+
+                </h1>
+
+
+                <p class="page-subtitle">
+
+                    Schedule and track learning sessions
+                    for your accepted swaps.
+
+                </p>
+
+
+
+                <div class="card">
+
+                    <h3>
+
+                        Schedule a Session
+
+                    </h3>
+
+
+                    <p class="page-subtitle">
+
+                        You need the Swap ID of an accepted
+                        swap (find it on Active Swaps).
+
+                    </p>
+
+
+                    <form
+                        id="scheduleSessionForm"
+                        class="small-form"
+                        style="grid-template-columns: 1fr 1fr 1fr auto;">
+
+
+                        <div class="field">
+
+                            <label>
+
+                                Swap ID
+
+                            </label>
+
+
+                            <input
+                                id="swapIdInput"
+                                type="number"
+                                placeholder="Example: 1"
+                                required>
+
+                        </div>
+
+
+
+                        <div class="field">
+
+                            <label>
+
+                                Date &amp; Time
+
+                            </label>
+
+
+                            <input
+                                id="sessionDateInput"
+                                type="datetime-local"
+                                required>
+
+                        </div>
+
+
+
+                        <div class="field">
+
+                            <label>
+
+                                Duration (minutes)
+
+                            </label>
+
+
+                            <input
+                                id="durationInput"
+                                type="number"
+                                placeholder="60"
+                                required>
+
+                        </div>
+
+
+
+                        <button
+                            class="btn btn-primary"
+                            type="submit">
+
+                            Schedule
+
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <h3>
+
+                        Your Sessions
+
+                    </h3>
+
+
+                    <div
+                        id="sessionList"
+                        class="list">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+</section>
+
+
+
+<!-- NOTICE -->
+
+<div
+    id="notice"
+    class="notice">
+
+</div>
+
+
+
+<script>
+
+
+/* ===================================================== */
+/* CONFIGURATION */
+/* ===================================================== */
+
+const API_BASE = "http://localhost:5000";
+
+
+let currentUser =
+    JSON.parse(
+        localStorage.getItem("skillSwapUser") || "null"
+    );
+
+
+let allSkills = [];
+
+let mySkills = [];
+
+let openConversationUserId = null;
+
+
+
+/* ===================================================== */
+/* NOTICE */
+/* ===================================================== */
+
+function showNotice(message, type = "success") {
+
+    const notice =
+        document.getElementById("notice");
+
+
+    notice.textContent = message;
+
+
+    notice.className =
+        "notice " + type;
+
+
+    notice.style.display = "block";
+
+
+    setTimeout(() => {
+
+        notice.style.display = "none";
+
+    }, 3500);
+
+}
+
+
+
+/* ===================================================== */
+/* API HELPER */
+/* ===================================================== */
+
+async function api(url, options = {}) {
+
+    try {
+
+        const response =
+            await fetch(
+                API_BASE + url,
+                {
+                    ...options,
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        ...(options.headers || {})
+                    }
+                }
+            );
+
+
+        const data =
+            await response
+                .json()
+                .catch(() => ({}));
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Something went wrong"
+            );
+
+        }
+
+
+        /*
+         * Some backend endpoints return:
+         * {success:true, swaps:[...]}
+         *
+         * Other endpoints may return:
+         * {success:true, data:[...]}
+         *
+         * Handle both.
+         */
+
+        if (
+            data &&
+            data.success === true
+        ) {
+
+            if (Array.isArray(data.swaps)) {
+
+                return data.swaps;
+
+            }
+
+
+            if (Array.isArray(data.requests)) {
+
+                return data.requests;
+
+            }
+
+
+            if (Array.isArray(data.skills)) {
+
+                return data.skills;
+
+            }
+
+
+            if (Array.isArray(data.matches)) {
+
+                return data.matches;
+
+            }
+
+
+            if (Array.isArray(data.userSkills)) {
+
+                return data.userSkills;
+
+            }
+
+        }
+
+
+        return data;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "API Error:",
+            error
+        );
+
+
+        showNotice(
+            error.message ||
+            "Cannot connect to backend",
+            "error"
+        );
+
+
+        throw error;
+
+    }
+
+}
+
+
+
+/* ===================================================== */
+/* EMPTY MESSAGE */
+/* ===================================================== */
+
+function setEmpty(element, message) {
+
+    element.innerHTML =
+        `<div class="empty">${message}</div>`;
+
+}
+
+
+
+/* ===================================================== */
+/* USER UI */
+/* ===================================================== */
+
+function updateUserUI() {
+
+    if (!currentUser) return;
+
+
+    const name =
+        currentUser.name ||
+        currentUser.user_name ||
+        "User";
+
+
+    const email =
+        currentUser.email || "";
+
+
+    document.getElementById(
+        "topUserName"
+    ).textContent = name;
+
+
+    document.getElementById(
+        "topUserEmail"
+    ).textContent = email;
+
+
+    document.getElementById(
+        "welcomeName"
+    ).textContent =
+        name.split(" ")[0];
+
+
+    document.getElementById(
+        "avatar"
+    ).textContent =
+        name.charAt(0).toUpperCase();
+
+}
+
+
+
+/* ===================================================== */
+/* AUTH TAB */
+/* ===================================================== */
+
+function switchAuth(mode) {
+
+    const login =
+        mode === "login";
+
+
+    document
+        .getElementById("loginForm")
+        .classList
+        .toggle(
+            "hidden",
+            !login
+        );
+
+
+    document
+        .getElementById("registerForm")
+        .classList
+        .toggle(
+            "hidden",
+            login
+        );
+
+
+    document
+        .getElementById("loginTab")
+        .classList
+        .toggle(
+            "active",
+            login
+        );
+
+
+    document
+        .getElementById("registerTab")
+        .classList
+        .toggle(
+            "active",
+            !login
+        );
+
+
+    document.getElementById(
+        "authTitle"
+    ).textContent =
+        login
+            ? "Welcome back"
+            : "Create your account";
+
+
+    document.getElementById(
+        "authText"
+    ).textContent =
+        login
+
+            ? "Login to continue your skill exchange journey."
+
+            : "Join the community and start exchanging knowledge.";
+
+}
+
+
+
+/* ===================================================== */
+/* AUTH BUTTONS */
+/* ===================================================== */
+
+document
+    .getElementById("loginTab")
+    .onclick = () =>
+        switchAuth("login");
+
+
+document
+    .getElementById("registerTab")
+    .onclick = () =>
+        switchAuth("register");
+
+
+
+/* ===================================================== */
+/* REGISTER */
+/* ===================================================== */
+
+document
+    .getElementById("registerForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document
+                    .getElementById(
+                        "registerName"
+                    )
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById(
+                        "registerEmail"
+                    )
+                    .value
+                    .trim();
+
+
+            const phone =
+                document
+                    .getElementById(
+                        "registerPhone"
+                    )
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById(
+                        "registerPassword"
+                    )
+                    .value;
+
+
+            if (
+                !name ||
+                !email ||
+                !phone ||
+                !password
+            ) {
+
+                showNotice(
+                    "Please fill all fields",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const result =
+                    await api(
+                        "/api/register",
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+
+                                    name: name,
+
+                                    email: email,
+
+                                    phone: phone,
+
+                                    password: password
+
+                                })
+                        }
+                    );
+
+
+                showNotice(
+                    result.message ||
+                    "Registration successful"
+                );
+
+
+                document
+                    .getElementById(
+                        "registerForm"
+                    )
+                    .reset();
+
+
+                switchAuth("login");
+
+            }
+
+            catch (_) {}
+
+        }
+    );
+
+
+
+/* ===================================================== */
+/* LOGIN */
+/* ===================================================== */
+
+document
+    .getElementById("loginForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document
+                    .getElementById(
+                        "loginEmail"
+                    )
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById(
+                        "loginPassword"
+                    )
+                    .value;
+
+
+            if (!email || !password) {
+
+                showNotice(
+                    "Enter email and password",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const result =
+                    await api(
+                        "/api/login",
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+
+                                    email: email,
+
+                                    password: password
+
+                                })
+                        }
+                    );
+
+
+                /*
+                 * Backend should return:
+                 *
+                 * {
+                 *   success: true,
+                 *   user: {...}
+                 * }
+                 */
+
+                currentUser =
+                    result.user;
+
+
+                localStorage.setItem(
+                    "skillSwapUser",
+                    JSON.stringify(
+                        currentUser
+                    )
+                );
+
+
+                await showDashboard();
+
+
+                showNotice(
+                    result.message ||
+                    "Login successful"
+                );
+
+            }
+
+            catch (_) {}
+
+        }
+    );
+
+
+
+/* ===================================================== */
+/* LOGOUT */
+/* ===================================================== */
+
+document
+    .getElementById("logoutBtn")
+    .onclick = function() {
+
+        localStorage.removeItem(
+            "skillSwapUser"
+        );
+
+
+        currentUser = null;
+
+
+        document
+            .getElementById(
+                "dashboard"
+            )
+            .classList
+            .add("hidden");
+
+
+        document
+            .getElementById(
+                "authPage"
+            )
+            .classList
+            .remove("hidden");
+
+
+        switchAuth("login");
+
+    };
+
+
+
+/* ===================================================== */
+/* NAVIGATION */
+/* ===================================================== */
+
+document
+    .querySelectorAll(".nav-btn")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            async function() {
+
+                document
+                    .querySelectorAll(
+                        ".nav-btn"
+                    )
+                    .forEach(btn => {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                document
+                    .querySelectorAll(
+                        ".section"
+                    )
+                    .forEach(section => {
+
+                        section.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                const page =
+                    button.dataset.page;
+
+
+                document
+                    .getElementById(page)
+                    .classList
+                    .add("active");
+
+
+                await loadPage(page);
+
+            }
+        );
+
+    });
+
+
+
+/* ===================================================== */
+/* PAGE LOADER */
+/* ===================================================== */
+
+async function loadPage(page) {
+
+    if (!currentUser) return;
+
+
+    if (page === "home") {
+
+        await loadDashboard();
+
+    }
+
+
+    if (page === "skills") {
+
+        await loadMySkills();
+
+    }
+
+
+    if (page === "matches") {
+
+        await loadMatches();
+
+    }
+
+
+    if (page === "requests") {
+
+        await loadRequests();
+
+    }
+
+
+    if (page === "swaps") {
+
+        await loadSwaps();
+
+    }
+
+
+    if (page === "messages") {
+
+        await loadConversations();
+
+    }
+
+
+    if (page === "sessions") {
+
+        await loadSessions();
+
+    }
+
+}
+
+
+
+/* ===================================================== */
+/* LOAD ALL SKILLS */
+/* ===================================================== */
+
+async function loadSkills() {
+
+    const result =
+        await api("/api/skills");
+
+
+    /*
+     * If API helper returned array.
+     */
+
+    allSkills =
+        Array.isArray(result)
+            ? result
+            : [];
+
+
+    const selects = [
+
+        document.getElementById(
+            "skillSelect"
+        ),
+
+        document.getElementById(
+            "offeredSkillSelect"
+        ),
+
+        document.getElementById(
+            "requestedSkillSelect"
+        )
+
+    ];
+
+
+    selects.forEach(select => {
+
+        if (!select) return;
+
+
+        select.innerHTML =
+            `<option value="">
+                Select a skill
+            </option>`;
+
+
+        allSkills.forEach(skill => {
+
+            select.innerHTML +=
+                `<option value="${skill.skill_id}">
+                    ${skill.skill_name}
+                </option>`;
+
+        });
+
+    });
+
+}
+
+
+
+/* ===================================================== */
+/* LOAD MY SKILLS */
+/* ===================================================== */
+
+async function loadMySkills() {
+
+    if (!currentUser) return;
+
+
+    const result =
+        await api(
+            `/api/user-skills/${currentUser.user_id}`
+        );
+
+
+    mySkills =
+        Array.isArray(result)
+            ? result
+            : [];
+
+
+    const offers =
+        mySkills.filter(
+            skill =>
+                String(
+                    skill.skill_type
+                ).toUpperCase()
+                === "OFFER"
+        );
+
+
+    const wants =
+        mySkills.filter(
+            skill =>
+                String(
+                    skill.skill_type
+                ).toUpperCase()
+                === "WANT"
+        );
+
+
+    renderSkillPills(
+        document.getElementById(
+            "offerSkills"
+        ),
+        offers,
+        false
+    );
+
+
+    renderSkillPills(
+        document.getElementById(
+            "wantSkills"
+        ),
+        wants,
+        true
+    );
+
+
+    document.getElementById(
+        "offerCount"
+    ).textContent =
+        offers.length;
+
+
+    document.getElementById(
+        "wantCount"
+    ).textContent =
+        wants.length;
+
+}
+
+
+
+/* ===================================================== */
+/* RENDER SKILLS */
+/* ===================================================== */
+
+function renderSkillPills(
+    element,
+    skills,
+    want
+) {
+
+    if (!skills.length) {
+
+        setEmpty(
+            element,
+
+            want
+                ? "You have not added any learning goals yet."
+                : "You have not added any skills to offer yet."
+        );
+
+        return;
+
+    }
+
+
+    element.innerHTML =
+        skills
+            .map(skill =>
+                `<span class="skill-pill ${want ? "want" : ""}">
+                    ${skill.skill_name}
+                </span>`
+            )
+            .join("");
+
+}
+
+
+
+/* ===================================================== */
+/* ADD SKILL */
+/* ===================================================== */
+
+document
+    .getElementById(
+        "addSkillForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const skillId =
+                Number(
+                    document
+                        .getElementById(
+                            "skillSelect"
+                        )
+                        .value
+                );
+
+
+            const skillType =
+                document
+                    .getElementById(
+                        "skillType"
+                    )
+                    .value;
+
+
+            if (!skillId) {
+
+                showNotice(
+                    "Please select a skill",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const result =
+                    await api(
+                        "/api/user-skills",
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+
+                                    user_id:
+                                        currentUser.user_id,
+
+                                    skill_id:
+                                        skillId,
+
+                                    skill_type:
+                                        skillType
+
+                                })
+                        }
+                    );
+
+
+                showNotice(
+                    result.message ||
+                    "Skill added successfully"
+                );
+
+
+                document
+                    .getElementById(
+                        "addSkillForm"
+                    )
+                    .reset();
+
+
+                await loadMySkills();
+
+                await loadDashboard();
+
+            }
+
+            catch (_) {}
+
+        }
+    );
+
+
+
+/* ===================================================== */
+/* DASHBOARD */
+/* ===================================================== */
+
+async function loadDashboard() {
+
+    if (!currentUser) return;
+
+
+    try {
+
+        await loadMySkills();
+
+
+        const requests =
+            await api(
+                `/api/requests/${currentUser.user_id}`
+            );
+
+
+        const swaps =
+            await api(
+                `/api/swaps/${currentUser.user_id}`
+            );
+
+
+        const requestArray =
+            Array.isArray(requests)
+                ? requests
+                : [];
+
+
+        const swapArray =
+            Array.isArray(swaps)
+                ? swaps
+                : [];
+
+
+        document.getElementById(
+            "requestCount"
+        ).textContent =
+            requestArray.length;
+
+
+        /*
+         * New backend returns ACCEPTED
+         * and COMPLETED.
+         *
+         * Active means ACCEPTED.
+         */
+
+        const activeSwaps =
+            swapArray.filter(
+                swap =>
+                    String(
+                        swap.swap_status
+                    ).toUpperCase()
+                    === "ACCEPTED"
+            );
+
+
+        document.getElementById(
+            "swapCount"
+        ).textContent =
+            activeSwaps.length;
+
+
+        const offers =
+            mySkills.filter(
+                skill =>
+                    String(
+                        skill.skill_type
+                    ).toUpperCase()
+                    === "OFFER"
+            );
+
+
+        const wants =
+            mySkills.filter(
+                skill =>
+                    String(
+                        skill.skill_type
+                    ).toUpperCase()
+                    === "WANT"
+            );
+
+
+        renderSkillPills(
+            document.getElementById(
+                "dashboardOffers"
+            ),
+            offers,
+            false
+        );
+
+
+        renderSkillPills(
+            document.getElementById(
+                "dashboardWants"
+            ),
+            wants,
+            true
+        );
+
+    }
+
+    catch (_) {}
+
+}
+
+
+
+/* ===================================================== */
+/* MATCHES */
+/* ===================================================== */
+
+async function loadMatches() {
+
+    const list =
+        document.getElementById(
+            "matchList"
+        );
+
+
+    list.innerHTML =
+        '<div class="empty">Finding your best skill matches...</div>';
+
+
+    try {
+
+        const result =
+            await api(
+                `/api/matches/${currentUser.user_id}`
+            );
+
+
+        const matches =
+            Array.isArray(result)
+                ? result
+                : [];
+
+
+        if (!matches.length) {
+
+            setEmpty(
+                list,
+
+                "No perfect two-way matches found yet. Add more OFFER and WANT skills."
+            );
+
+            return;
+
+        }
+
+
+        list.innerHTML =
+            matches
+                .map(match =>
+                    `
+
+                    <div class="list-item">
+
+                        <div>
+
+                            <h4>
+                                ${match.name}
+                            </h4>
+
+                            <p>
+                                They can teach you:
+                                <strong>
+                                    ${match.they_can_teach}
+                                </strong>
+                            </p>
+
+                            <p>
+                                They want to learn:
+                                <strong>
+                                    ${match.they_want_to_learn}
+                                </strong>
+                            </p>
+
+                            <p>
+                                User ID:
+                                ${match.user_id}
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="useMatch(${match.user_id})">
+
+                            Use Match
+
+                        </button>
+
+                    </div>
+
+                    `
+                )
+                .join("");
+
+    }
+
+    catch (_) {}
+
+}
+
+
+
+/* ===================================================== */
+/* USE MATCH */
+/* ===================================================== */
+
+function useMatch(userId) {
+
+    document.getElementById(
+        "receiverId"
+    ).value = userId;
+
+
+    showNotice(
+        "Match selected. Now choose the skills for the swap.",
+        "success"
+    );
+
+}
+
+
+
+/* ===================================================== */
+/* SEND SWAP REQUEST */
+/* ===================================================== */
+
+document
+    .getElementById(
+        "sendRequestForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const receiverId =
+                Number(
+                    document
+                        .getElementById(
+                            "receiverId"
+                        )
+                        .value
+                );
+
+
+            const offeredSkillId =
+                Number(
+                    document
+                        .getElementById(
+                            "offeredSkillSelect"
+                        )
+                        .value
+                );
+
+
+            const requestedSkillId =
+                Number(
+                    document
+                        .getElementById(
+                            "requestedSkillSelect"
+                        )
+                        .value
+                );
+
+
+            if (
+                !receiverId ||
+                !offeredSkillId ||
+                !requestedSkillId
+            ) {
+
+                showNotice(
+                    "Please fill all swap request fields",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const result =
+                    await api(
+                        "/api/swap-request",
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+
+                                    requester_id:
+                                        currentUser.user_id,
+
+                                    receiver_id:
+                                        receiverId,
+
+                                    offered_skill_id:
+                                        offeredSkillId,
+
+                                    requested_skill_id:
+                                        requestedSkillId
+
+                                })
+                        }
+                    );
+
+
+                showNotice(
+                    result.message ||
+                    "Swap request sent successfully"
+                );
+
+
+                document
+                    .getElementById(
+                        "sendRequestForm"
+                    )
+                    .reset();
+
+
+                await loadDashboard();
+
+            }
+
+            catch (_) {}
+
+        }
+    );
+
+
+
+/* ===================================================== */
+/* REQUESTS */
+/* ===================================================== */
+
+async function loadRequests() {
+
+    const list =
+        document.getElementById(
+            "requestList"
+        );
+
+
+    list.innerHTML =
+        '<div class="empty">Loading requests...</div>';
+
+
+    try {
+
+        const result =
+            await api(
+                `/api/requests/${currentUser.user_id}`
+            );
+
+
+        const requests =
+            Array.isArray(result)
+                ? result
+                : [];
+
+
+        if (!requests.length) {
+
+            setEmpty(
+                list,
+                "You have not received any swap requests yet."
+            );
+
+            return;
+
+        }
+
+
+        list.innerHTML =
+            requests
+                .map(request => {
+
+
+                    const status =
+                        String(
+                            request.swap_status ||
+                            request.status ||
+                            "Pending"
+                        ).toUpperCase();
+
+
+                    return `
+
+                    <div class="list-item">
+
+                        <div>
+
+                            <h4>
+                                ${request.sender_name ||
+                                  request.requester_name ||
+                                  "User"}
+                            </h4>
+
+
+                            <p>
+
+                                Offers:
+
+                                <strong>
+                                    ${request.offered_skill}
+                                </strong>
+
+                            </p>
+
+
+                            <p>
+
+                                Wants:
+
+                                <strong>
+                                    ${request.requested_skill}
+                                </strong>
+
+                            </p>
+
+
+                            <p>
+
+                                Swap ID:
+                                ${request.swap_id}
+
+                            </p>
+
+
+                            <br>
+
+
+                            <span
+                                class="status ${status}">
+
+                                ${status}
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="actions">
+
+                            ${
+                                status === "PENDING"
+
+                                ?
+
+                                `
+
+                                <button
+                                    class="btn btn-success"
+                                    onclick="acceptRequest(${request.swap_id})">
+
+                                    Accept
+
+                                </button>
+
+
+                                <button
+                                    class="btn btn-danger"
+                                    onclick="rejectRequest(${request.swap_id})">
+
+                                    Reject
+
+                                </button>
+
+                                `
+
+                                :
+
+                                ""
+
+                            }
+
+                        </div>
+
+                    </div>
+
+                    `;
+
+                })
+                .join("");
+
+    }
+
+    catch (_) {}
+
+}
+
+
+
+/* ===================================================== */
+/* ACCEPT REQUEST */
+/* ===================================================== */
+
+async function acceptRequest(id) {
+
+    try {
+
+        const result =
+            await api(
+                `/api/swap-request/${id}/accept`,
+                {
+                    method: "PUT"
+                }
+            );
+
+
+        showNotice(
+            result.message ||
+            "Swap request accepted"
+        );
+
+
+        await loadRequests();
+
+        await loadDashboard();
+
+    }
+
+    catch (_) {}
+
+}
+
+
+
+/* ===================================================== */
+/* REJECT REQUEST */
+/* ===================================================== */
+
+async function rejectRequest(id) {
+
+    try {
+
+        const result =
+            await api(
+                `/api/swap-request/${id}/reject`,
+                {
+                    method: "PUT"
+                }
+            );
+
+
+        showNotice(
+            result.message ||
+            "Swap request rejected"
+        );
+
+
+        await loadRequests();
+
+        await loadDashboard();
+
+    }
+
+    catch (_) {}
+
+}
+
+
+
+/* ===================================================== */
+/* ACTIVE / COMPLETED SWAPS */
+/* ===================================================== */
+
+async function loadSwaps() {
+
+    const list =
+        document.getElementById(
+            "swapList"
+        );
+
+
+    list.innerHTML =
+        '<div class="empty">Loading swaps...</div>';
+
+
+    if (!currentUser) {
+
+        setEmpty(
+            list,
+            "Please login first."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        /*
+         * IMPORTANT:
+         *
+         * New backend endpoint:
+         *
+         * GET /api/swaps/:userId
+         *
+         * returns:
+         *
+         * {
+         *   success: true,
+         *   swaps: [...]
+         * }
+         */
+
+        const result =
+            await fetch(
+                `${API_BASE}/api/swaps/${currentUser.user_id}`
+            );
+
+
+        const data =
+            await result.json();
+
+
+        console.log(
+            "ACTIVE SWAPS RESPONSE:",
+            data
+        );
+
+
+        if (!result.ok) {
+
+            throw new Error(
+                data.message ||
+                "Unable to load swaps"
+            );
+
+        }
+
+
+        const swaps =
+            Array.isArray(data.swaps)
+                ? data.swaps
+                : [];
+
+
+        if (!swaps.length) {
+
+            setEmpty(
+                list,
+
+                "You do not have any accepted or completed swaps yet."
+            );
+
+            return;
+
+        }
+
+
+        list.innerHTML =
+            swaps
+                .map(swap => {
+
+
+                    const status =
+                        String(
+                            swap.swap_status ||
+                            ""
+                        ).toUpperCase();
+
+
+                    /*
+                     * Determine other user.
+                     */
+
+                    const otherUser =
+                        Number(
+                            currentUser.user_id
+                        )
+                        === Number(
+                            swap.sender_id
+                        )
+
+                        ? swap.receiver_name
+
+                        : swap.sender_name;
+
+
+                    return `
+
+                    <div class="list-item">
+
+                        <div>
+
+                            <h4>
+
+                                🤝 Skill Swap with
+                                ${otherUser || "User"}
+
+                            </h4>
+
+
+                            <p>
+
+                                Swap ID:
+                                ${swap.swap_id}
+
+                            </p>
+
+
+                            <div class="swap-details">
+
+                                <p>
+
+                                    <strong>
+                                        You / Partner
+                                    </strong>
+
+                                </p>
+
+
+                                <p>
+
+                                    Offered Skill:
+
+                                    <strong>
+                                        ${swap.offered_skill}
+                                    </strong>
+
+                                </p>
+
+
+                                <p>
+
+                                    Requested Skill:
+
+                                    <strong>
+                                        ${swap.requested_skill}
+                                    </strong>
+
+                                </p>
+
+
+                                <p>
+
+                                    Swap Date:
+
+                                    <strong>
+                                        ${formatDate(
+                                            swap.swap_date
+                                        )}
+                                    </strong>
+
+                                </p>
+
+                            </div>
+
+
+                            <br>
+
+
+                            <span
+                                class="status ${status}">
+
+                                ${status}
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="actions">
+
+                            ${
+                                status === "ACCEPTED"
+
+                                ?
+
+                                `
+
+                                <button
+                                    class="btn btn-primary"
+                                    onclick="completeSwap(${swap.swap_id})">
+
+                                    Mark Completed
+
+                                </button>
+
+                                `
+
+                                :
+
+                                `<span>
+                                    ✓ Completed
+                                </span>`
+
+                            }
+
+                        </div>
+
+                    </div>
+
+                    `;
+
+                })
+                .join("");
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "LOAD SWAPS ERROR:",
+            error
+        );
+
+
+        setEmpty(
+            list,
+
+            "Unable to load swaps. Check that the backend is running."
+        );
+
+    }
+
+}
+
+
+
+/* ===================================================== */
+/* DATE FORMAT */
+/* ===================================================== */
+
+function formatDate(dateValue) {
+
+    if (!dateValue) {
+
+        return "Not available";
+
+    }
+
+
+    const date =
+        new Date(dateValue);
+
+
+    if (isNaN(date.getTime())) {
+
+        return dateValue;
+
+    }
+
+
+    return date.toLocaleString();
+
+}
+
+
+
+/* ===================================================== */
+/* COMPLETE SWAP */
+/* ===================================================== */
+
+async function completeSwap(id) {
+
+    if (
+        !confirm(
+            "Are you sure you want to mark this swap as completed?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            await api(
+                `/api/swaps/${id}/complete`,
+                {
+                    method: "PUT"
+                }
+            );
+
+
+        showNotice(
+            result.message ||
+            "Skill swap completed successfully"
+        );
+
+
+        await loadSwaps();
+
+        await loadDashboard();
+
+    }
+
+    catch (_) {}
+
+}
+
+
+
+/* ===================================================== */
+/* MESSAGES: LOAD CONVERSATION LIST (INBOX) */
+/* ===================================================== */
+
+async function loadConversations() {
+
+    const list =
+        document.getElementById(
+            "conversationList"
+        );
+
+
+    list.innerHTML =
+        '<div class="empty">Loading conversations...</div>';
+
+
+    try {
+
+        const result =
+            await api(
+                `/api/messages/conversations/${currentUser.user_id}`
+            );
+
+
+        const conversations =
+            Array.isArray(result)
+                ? result
+                : [];
+
+
+        if (!conversations.length) {
+
+            setEmpty(
+                list,
+                "No conversations yet. Start one below."
+            );
+
+            return;
+
+        }
+
+
+        list.innerHTML =
+            conversations
+                .map(convo =>
+                    `
+
+                    <div
+                        class="conversation-item"
+                        onclick="openConversation(${convo.user_id}, '${String(convo.name).replace(/'/g, "\\'")}')">
+
+                        <h4>
+                            ${convo.name}
+                        </h4>
+
+                        <p>
+                            ${convo.last_message}
+                        </p>
+
+                    </div>
+
+                    `
+                )
+                .join("");
+
+    }
+
+    catch (_) {}
+
+}
+
+
+
+/* ===================================================== */
+/* MESSAGES: OPEN A CONVERSATION */
+/* ===================================================== */
+
+async function openConversation(otherUserId, otherUserName) {
+
+    openConversationUserId = otherUserId;
+
+
+    document.getElementById(
+        "chatTitle"
+    ).textContent = otherUserName;
+
+
+    document.getElementById(
+        "receiverIdInput"
+    ).value = otherUserId;
+
+
+    const chatBox =
+        document.getElementById(
+            "chatMessages"
+        );
+
+
+    chatBox.innerHTML =
+        '<div class="empty">Loading messages...</div>';
+
+
+    try {
+
+        const result =
+            await api(
+                `/api/messages/${currentUser.user_id}/${otherUserId}`
+            );
+
+
+        const messages =
+            Array.isArray(result)
+                ? result
+                : [];
+
+
+        if (!messages.length) {
+
+            setEmpty(
+                chatBox,
+                "No messages yet. Say hello!"
+            );
+
+            return;
+
+        }
+
+
+        chatBox.innerHTML =
+            messages
+                .map(msg => {
+
+                    const isMine =
+                        Number(msg.sender_id)
+                        === Number(currentUser.user_id);
+
+                    return `
+
+                        <div class="chat-bubble ${isMine ? "mine" : "theirs"}">
+
+                            <div>
+                                ${msg.message_text}
+                            </div>
+
+                            <div class="time">
+                                ${formatDate(msg.message_date)}
+                            </div>
+
+                        </div>
+
+                    `;
+
+                })
+                .join("");
+
+
+        chatBox.scrollTop =
+            chatBox.scrollHeight;
+
+    }
+
+    catch (_) {}
+
+}
+
+
+
+/* ===================================================== */
+/* MESSAGES: SEND MESSAGE */
+/* ===================================================== */
+
+document
+    .getElementById(
+        "sendMessageForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const receiverId =
+                Number(
+                    document
+                        .getElementById(
+                            "receiverIdInput"
+                        )
+                        .value
+                );
+
+
+            const messageText =
+                document
+                    .getElementById(
+                        "messageTextInput"
+                    )
+                    .value
+                    .trim();
+
+
+            if (!receiverId || !messageText) {
+
+                showNotice(
+                    "Enter a receiver ID and a message",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const result =
+                    await api(
+                        "/api/messages",
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+
+                                    sender_id:
+                                        currentUser.user_id,
+
+                                    receiver_id:
+                                        receiverId,
+
+                                    message_text:
+                                        messageText
+
+                                })
+                        }
+                    );
+
+
+                showNotice(
+                    result.message ||
+                    "Message sent"
+                );
+
+
+                document.getElementById(
+                    "messageTextInput"
+                ).value = "";
+
+
+                await loadConversations();
+
+
+                if (openConversationUserId === receiverId) {
+
+                    await openConversation(
+                        receiverId,
+                        document.getElementById(
+                            "chatTitle"
+                        ).textContent
+                    );
+
+                }
+
+            }
+
+            catch (_) {}
+
+        }
+    );
+
+
+
+/* ===================================================== */
+/* SESSIONS: LOAD LIST */
+/* ===================================================== */
+
+async function loadSessions() {
+
+    const list =
+        document.getElementById(
+            "sessionList"
+        );
+
+
+    list.innerHTML =
+        '<div class="empty">Loading sessions...</div>';
+
+
+    try {
+
+        const result =
+            await api(
+                `/api/sessions/${currentUser.user_id}`
+            );
+
+
+        const sessions =
+            Array.isArray(result)
+                ? result
+                : [];
+
+
+        if (!sessions.length) {
+
+            setEmpty(
+                list,
+                "You have no scheduled sessions yet."
+            );
+
+            return;
+
+        }
+
+
+        list.innerHTML =
+            sessions
+                .map(session => {
+
+
+                    const otherUser =
+                        Number(currentUser.user_id)
+                        === Number(session.sender_id)
+
+                        ? session.receiver_name
+
+                        : session.sender_name;
+
+
+                    const status =
+                        String(
+                            session.session_status
+                        ).toUpperCase();
+
+
+                    return `
+
+                    <div class="list-item">
+
+                        <div>
+
+                            <h4>
+
+                                📅 Session with
+                                ${otherUser || "User"}
+
+                            </h4>
+
+
+                            <p>
+
+                                Swap:
+
+                                <strong>
+                                    ${session.offered_skill}
+                                    ⇄
+                                    ${session.requested_skill}
+                                </strong>
+
+                            </p>
+
+
+                            <p>
+
+                                When:
+
+                                <strong>
+                                    ${formatDate(session.session_date)}
+                                </strong>
+
+                                &nbsp;·&nbsp;
+
+                                Duration:
+
+                                <strong>
+                                    ${session.duration} min
+                                </strong>
+
+                            </p>
+
+
+                            <br>
+
+
+                            <span
+                                class="status ${status}">
+
+                                ${status}
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="actions">
+
+                            ${
+                                status === "SCHEDULED"
+
+                                ?
+
+                                `
+
+                                <button
+                                    class="btn btn-success"
+                                    onclick="updateSessionStatus(${session.session_id}, 'Completed')">
+
+                                    Mark Completed
+
+                                </button>
+
+
+                                <button
+                                    class="btn btn-danger"
+                                    onclick="updateSessionStatus(${session.session_id}, 'Cancelled')">
+
+                                    Cancel
+
+                                </button>
+
+                                `
+
+                                :
+
+                                ""
+
+                            }
+
+                        </div>
+
+                    </div>
+
+                    `;
+
+                })
+                .join("");
+
+    }
+
+    catch (_) {}
+
+}
+
+
+
+/* ===================================================== */
+/* SESSIONS: SCHEDULE */
+/* ===================================================== */
+
+document
+    .getElementById(
+        "scheduleSessionForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const swapId =
+                Number(
+                    document
+                        .getElementById(
+                            "swapIdInput"
+                        )
+                        .value
+                );
+
+
+            const sessionDate =
+                document
+                    .getElementById(
+                        "sessionDateInput"
+                    )
+                    .value;
+
+
+            const duration =
+                Number(
+                    document
+                        .getElementById(
+                            "durationInput"
+                        )
+                        .value
+                );
+
+
+            if (!swapId || !sessionDate || !duration) {
+
+                showNotice(
+                    "Please fill all session fields",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const result =
+                    await api(
+                        "/api/sessions",
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+
+                                    swap_id:
+                                        swapId,
+
+                                    session_date:
+                                        sessionDate.replace("T", " ") + ":00",
+
+                                    duration:
+                                        duration
+
+                                })
+                        }
+                    );
+
+
+                showNotice(
+                    result.message ||
+                    "Session scheduled successfully"
+                );
+
+
+                document
+                    .getElementById(
+                        "scheduleSessionForm"
+                    )
+                    .reset();
+
+
+                await loadSessions();
+
+            }
+
+            catch (_) {}
+
+        }
+    );
+
+
+
+/* ===================================================== */
+/* SESSIONS: UPDATE STATUS */
+/* ===================================================== */
+
+async function updateSessionStatus(sessionId, status) {
+
+    try {
+
+        const result =
+            await api(
+                `/api/sessions/${sessionId}/status`,
+                {
+                    method: "PUT",
+
+                    body:
+                        JSON.stringify({ status })
+                }
+            );
+
+
+        showNotice(
+            result.message ||
+            "Session updated"
+        );
+
+
+        await loadSessions();
+
+    }
+
+    catch (_) {}
+
+}
+
+
+
+/* ===================================================== */
+/* SHOW DASHBOARD */
+/* ===================================================== */
+
+async function showDashboard() {
+
+    document
+        .getElementById(
+            "authPage"
+        )
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById(
+            "dashboard"
+        )
+        .classList
+        .remove("hidden");
+
+
+    updateUserUI();
+
+
+    try {
+
+        await loadSkills();
+
+        await loadDashboard();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Dashboard loading error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* ===================================================== */
+/* START APPLICATION */
+/* ===================================================== */
+
+if (currentUser) {
+
+    showDashboard();
+
+}
+
+</script>
+
+
+</body>
+
+</html>
