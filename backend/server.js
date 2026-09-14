@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const db = require("./db");
 
 const authRoutes = require("./routes/auth");
@@ -26,11 +27,7 @@ app.use(express.json());
 // =====================================
 
 app.get("/", (req, res) => {
-
-    res.json({
-        message: "Skill Swap Management API is running"
-    });
-
+    res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
 });
 
 
