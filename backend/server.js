@@ -51,17 +51,23 @@ app.use("/api", sessionsRoutes);
 // SERVER
 // =====================================
 
-const PORT = 5000;
+app.use(async (req, res, next) => {
+    try {
+        await db.ready;
+        next();
+    } catch (error) {
+        res.status(503).json({ message: "Database is unavailable" });
+    }
+});
 
-db.ready
-    .then(() => {
-        app.listen(PORT, () => {
-            console.log(
-                `🚀 Server running at http://localhost:${PORT}`
-            );
+if (require.main === module) {
+    const PORT = process.env.PORT || 5000;
+    db.ready
+        .then(() => app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`)))
+        .catch((err) => {
+            console.error("Server startup aborted because the database is not ready:", err.message);
+            process.exitCode = 1;
         });
-    })
-    .catch((err) => {
-        console.error("❌ Server startup aborted because the database is not ready:", err.message);
-        process.exitCode = 1;
-    });
+}
+
+module.exports = app;

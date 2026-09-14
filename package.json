@@ -1,0 +1,7 @@
+{
+  "name": "skillswap",
+  "private": true,
+  "scripts": {
+    "start": "node backend/server.js"
+  }
+}
