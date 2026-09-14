@@ -36,6 +36,10 @@ CREATE TABLE IF NOT EXISTS sessions (
 
     duration        INT NOT NULL,           -- duration in minutes
 
+    agenda          VARCHAR(500) NULL,
+
+    meeting_link    VARCHAR(500) NULL,
+
     session_status  VARCHAR(20) NOT NULL DEFAULT 'Scheduled',
 
     FOREIGN KEY (swap_id) REFERENCES swap_requests(swap_id) ON DELETE CASCADE

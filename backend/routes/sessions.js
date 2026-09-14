@@ -11,7 +11,9 @@ router.post("/sessions", (req, res) => {
     const {
         swap_id,
         session_date,
-        duration
+        duration,
+        agenda = "",
+        meeting_link = ""
     } = req.body;
 
     if (!swap_id || !session_date || !duration) {
@@ -74,13 +76,13 @@ router.post("/sessions", (req, res) => {
 
             const insertSql = `
                 INSERT INTO sessions
-                (swap_id, session_date, duration, session_status)
-                VALUES (?, ?, ?, 'Scheduled')
+                (swap_id, session_date, duration, agenda, meeting_link, session_status)
+                VALUES (?, ?, ?, ?, ?, 'Scheduled')
             `;
 
             db.query(
                 insertSql,
-                [swap_id, session_date, duration],
+                [swap_id, session_date, duration, String(agenda).trim().slice(0, 500), String(meeting_link).trim().slice(0, 500)],
                 (err, result) => {
 
                     if (err) {
@@ -129,6 +131,8 @@ router.get("/sessions/:user_id", (req, res) => {
             se.swap_id,
             se.session_date,
             se.duration,
+            se.agenda,
+            se.meeting_link,
             se.session_status,
 
             sr.sender_id,

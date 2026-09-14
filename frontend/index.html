@@ -2423,10 +2423,22 @@
                                 id="durationInput"
                                 type="number"
                                 placeholder="60"
+                                min="15"
+                                max="480"
                                 required>
 
                         </div>
 
+
+                        <div class="field">
+                            <label for="agendaInput">Agenda</label>
+                            <input id="agendaInput" type="text" maxlength="500" placeholder="What will you learn together?">
+                        </div>
+
+                        <div class="field">
+                            <label for="meetingLinkInput">Google Meet link</label>
+                            <input id="meetingLinkInput" type="url" placeholder="Paste link from meet.new">
+                        </div>
 
 
                         <button
@@ -4764,11 +4776,14 @@ async function loadSessions() {
 
                                 Duration:
 
-                                <strong>
-                                    ${session.duration} min
-                                </strong>
+  <strong>
+  ${session.duration} min
+  </strong>
 
-                            </p>
+  </p>
+
+  ${session.agenda ? `<p>Agenda: <strong>${session.agenda}</strong></p>` : ""}
+  ${session.meeting_link ? `<p><a class="btn btn-success" href="${session.meeting_link}" target="_blank" rel="noopener noreferrer">Open Google Meet</a></p>` : `<p class="page-subtitle">No Meet link saved yet. Create one at <a href="https://meet.new" target="_blank" rel="noopener noreferrer">meet.new</a>, then reschedule with the link.</p>`}
 
 
                             <br>
@@ -4868,14 +4883,17 @@ document
                     .value;
 
 
-            const duration =
-                Number(
-                    document
-                        .getElementById(
-                            "durationInput"
-                        )
-                        .value
-                );
+  const duration =
+  Number(
+  document
+  .getElementById(
+  "durationInput"
+  )
+  .value
+  );
+
+  const agenda = document.getElementById("agendaInput").value.trim();
+  const meetingLink = document.getElementById("meetingLinkInput").value.trim();
 
 
             if (!swapId || !sessionDate || !duration) {
@@ -4907,10 +4925,14 @@ document
                                     session_date:
                                         sessionDate.replace("T", " ") + ":00",
 
-                                    duration:
-                                        duration
+  duration:
+  duration,
 
-                                })
+  agenda,
+
+  meeting_link: meetingLink
+
+  })
                         }
                     );
 
