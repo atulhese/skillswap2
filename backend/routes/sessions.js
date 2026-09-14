@@ -12,6 +12,7 @@ router.post("/sessions", (req, res) => {
         swap_id,
         session_date,
         duration,
+        title = "SkillSwap learning session",
         agenda = "",
         meeting_link = ""
     } = req.body;
@@ -76,13 +77,13 @@ router.post("/sessions", (req, res) => {
 
             const insertSql = `
                 INSERT INTO sessions
-                (swap_id, session_date, duration, agenda, meeting_link, session_status)
-                VALUES (?, ?, ?, ?, ?, 'Scheduled')
+                (swap_id, session_date, duration, title, agenda, meeting_link, session_status)
+                VALUES (?, ?, ?, ?, ?, ?, 'Scheduled')
             `;
 
             db.query(
                 insertSql,
-                [swap_id, session_date, duration, String(agenda).trim().slice(0, 500), String(meeting_link).trim().slice(0, 500)],
+                [swap_id, session_date, duration, String(title).trim().slice(0, 180), String(agenda).trim().slice(0, 500), String(meeting_link).trim().slice(0, 500)],
                 (err, result) => {
 
                     if (err) {
@@ -131,6 +132,7 @@ router.get("/sessions/:user_id", (req, res) => {
             se.swap_id,
             se.session_date,
             se.duration,
+            se.title,
             se.agenda,
             se.meeting_link,
             se.session_status,
@@ -139,7 +141,9 @@ router.get("/sessions/:user_id", (req, res) => {
             sr.receiver_id,
 
             sender.name AS sender_name,
+            sender.email AS sender_email,
             receiver.name AS receiver_name,
+            receiver.email AS receiver_email,
 
             offered.skill_name AS offered_skill,
             requested.skill_name AS requested_skill

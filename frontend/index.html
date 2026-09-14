@@ -2361,8 +2361,7 @@
 
                     <p class="page-subtitle">
 
-                        You need the Swap ID of an accepted
-                        swap (find it on Active Swaps).
+                        Select an accepted swap, add the meeting details, then paste the Google Meet link you create.
 
                     </p>
 
@@ -2382,11 +2381,9 @@
                             </label>
 
 
-                            <input
-                                id="swapIdInput"
-                                type="number"
-                                placeholder="Example: 1"
-                                required>
+                            <select id="swapIdInput" required>
+                                <option value="">Loading accepted swaps...</option>
+                            </select>
 
                         </div>
 
@@ -2431,13 +2428,22 @@
 
 
                         <div class="field">
+                            <label for="titleInput">Meeting title</label>
+                            <input id="titleInput" type="text" maxlength="180" placeholder="SkillSwap learning session" required>
+                        </div>
+
+                        <div class="field">
                             <label for="agendaInput">Agenda</label>
                             <input id="agendaInput" type="text" maxlength="500" placeholder="What will you learn together?">
                         </div>
 
                         <div class="field">
                             <label for="meetingLinkInput">Google Meet link</label>
-                            <input id="meetingLinkInput" type="url" placeholder="Paste link from meet.new">
+                            <div style="display:flex;gap:8px;align-items:center;">
+                                <input id="meetingLinkInput" type="url" placeholder="Paste your Meet link" style="flex:1;" required>
+                                <button class="btn btn-secondary" id="createMeetBtn" type="button">Create Meet</button>
+                            </div>
+                            <small class="page-subtitle">Create a room at Google Meet, copy the link, then paste it here.</small>
                         </div>
 
 
@@ -4675,13 +4681,47 @@ document
 
 
 
+document.getElementById("createMeetBtn").addEventListener("click", () => {
+  const meetUrl = "https://meet.google.com/new";
+  if (window.self !== window.top) {
+    window.open(meetUrl, "_blank", "noopener,noreferrer");
+  } else {
+    window.location.href = meetUrl;
+  }
+});
+
 /* ===================================================== */
 /* SESSIONS: LOAD LIST */
 /* ===================================================== */
 
+async function loadAcceptedSwapsForSchedule() {
+
+  const select = document.getElementById("swapIdInput");
+  if (!select || !currentUser) return;
+
+  try {
+    const response = await fetch(`${API_BASE}/api/swaps/${currentUser.user_id}`);
+    const data = await response.json();
+    const swaps = (Array.isArray(data.swaps) ? data.swaps : []).filter(swap =>
+      ["ACCEPTED", "COMPLETED"].includes(String(swap.swap_status || "").toUpperCase())
+    );
+
+    select.innerHTML = swaps.length
+      ? `<option value="">Select an accepted swap</option>${swaps.map(swap => {
+          const partner = Number(currentUser.user_id) === Number(swap.sender_id) ? swap.receiver_name : swap.sender_name;
+          return `<option value="${swap.swap_id}">${partner || "Partner"} · ${swap.offered_skill || "Skill swap"} ⇄ ${swap.requested_skill || ""} · Swap #${swap.swap_id}</option>`;
+        }).join("")}`
+      : '<option value="">No accepted swaps available</option>';
+  } catch (_) {
+    select.innerHTML = '<option value="">Unable to load accepted swaps</option>';
+  }
+}
+
 async function loadSessions() {
 
-    const list =
+  await loadAcceptedSwapsForSchedule();
+
+  const list =
         document.getElementById(
             "sessionList"
         );
@@ -4745,14 +4785,13 @@ async function loadSessions() {
 
                             <h4>
 
-                                📅 Session with
-                                ${otherUser || "User"}
-
+                                Session with ${otherUser || "User"}
                             </h4>
 
+                            <p><strong>Participants:</strong> ${session.sender_name || "User"} (${session.sender_email || "email unavailable"}) and ${session.receiver_name || "User"} (${session.receiver_email || "email unavailable"})</p>
+                            <p><strong>Meeting:</strong> ${session.title || "SkillSwap learning session"}</p>
 
                             <p>
-
                                 Swap:
 
                                 <strong>
@@ -4892,11 +4931,12 @@ document
   .value
   );
 
+  const title = document.getElementById("titleInput").value.trim();
   const agenda = document.getElementById("agendaInput").value.trim();
   const meetingLink = document.getElementById("meetingLinkInput").value.trim();
 
 
-            if (!swapId || !sessionDate || !duration) {
+            if (!swapId || !sessionDate || !duration || !title || !meetingLink) {
 
                 showNotice(
                     "Please fill all session fields",
@@ -4928,6 +4968,9 @@ document
   duration:
   duration,
 
+  title,
+
+  agenda:
   agenda,
 
   meeting_link: meetingLink

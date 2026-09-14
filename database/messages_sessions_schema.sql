@@ -36,6 +36,8 @@ CREATE TABLE IF NOT EXISTS sessions (
 
     duration        INT NOT NULL,           -- duration in minutes
 
+    title           VARCHAR(180) NOT NULL DEFAULT 'SkillSwap learning session',
+
     agenda          VARCHAR(500) NULL,
 
     meeting_link    VARCHAR(500) NULL,
