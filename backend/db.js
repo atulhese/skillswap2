@@ -21,6 +21,48 @@ db.connect((err) => {
 
     console.log("✅ MySQL Connected Successfully");
 
+    // Existing SkillSwap databases may have been created before session
+    // metadata was added. Bring those installations up to date at startup so
+    // scheduling and session listing work without a manual SQL step.
+    const sessionColumns = [
+        ["title", "VARCHAR(180) NOT NULL DEFAULT 'SkillSwap learning session'"],
+        ["agenda", "VARCHAR(500) NULL"],
+        ["meeting_link", "VARCHAR(500) NULL"]
+    ];
+
+    const ensureSessionColumns = (index = 0) => {
+        if (index >= sessionColumns.length) return;
+
+        const [column, definition] = sessionColumns[index];
+        const columnSql = `
+            SELECT COUNT(*) AS column_count
+            FROM information_schema.columns
+            WHERE table_schema = DATABASE()
+              AND table_name = 'sessions'
+              AND column_name = ?
+        `;
+
+        db.query(columnSql, [column], (columnError, rows) => {
+            if (columnError) {
+                console.log("Session schema check failed:", columnError.message);
+                return;
+            }
+
+            const continueMigration = () => ensureSessionColumns(index + 1);
+            if (rows[0].column_count > 0) return continueMigration();
+
+            db.query(`ALTER TABLE sessions ADD COLUMN ${column} ${definition}`, (alterError) => {
+                if (alterError) {
+                    console.log(`Session schema migration failed for ${column}:`, alterError.message);
+                    return;
+                }
+                continueMigration();
+            });
+        });
+    };
+
+    ensureSessionColumns();
+
 });
 
 module.exports = db;
