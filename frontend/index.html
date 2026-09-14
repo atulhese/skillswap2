@@ -961,6 +961,22 @@
         }
 
 
+        .accepted-swap-card {
+
+            border-left: 4px solid var(--secondary);
+
+        }
+
+
+        .chat-link {
+
+            background: #eef0ff;
+
+            color: var(--primary);
+
+        }
+
+
         .swap-details p {
 
             margin: 5px 0;
@@ -3825,7 +3841,7 @@ async function loadRequests() {
 
                     return `
 
-                    <div class="list-item">
+                    <div class="list-item ${status === "ACCEPTED" ? "accepted-swap-card" : ""}">
 
                         <div>
 
@@ -3902,6 +3918,20 @@ async function loadRequests() {
                                     onclick="rejectRequest(${request.swap_id})">
 
                                     Reject
+
+                                </button>
+
+                                `
+
+                                : status === "ACCEPTED"
+
+                                ? `
+
+                                <button
+                                    class="btn chat-link"
+                                    onclick="startConversation(${request.sender_id}, '${String(request.sender_name || "User").replace(/'/g, "\\'")}')">
+
+                                    Message partner
 
                                 </button>
 
@@ -4204,6 +4234,14 @@ async function loadSwaps() {
 
                         <div class="actions">
 
+                            <button
+                                class="btn chat-link"
+                                onclick="startConversation(${Number(currentUser.user_id) === Number(swap.sender_id) ? swap.receiver_id : swap.sender_id}, '${String(otherUser || "User").replace(/'/g, "\\'")}')">
+
+                                Message partner
+
+                            </button>
+
                             ${
                                 status === "ACCEPTED"
 
@@ -4336,11 +4374,28 @@ async function completeSwap(id) {
 
 
 
-/* ===================================================== */
-/* MESSAGES: LOAD CONVERSATION LIST (INBOX) */
-/* ===================================================== */
+  /* ===================================================== */
+  /* MESSAGES: OPEN ACCEPTED PARTNER CHAT */
+  /* ===================================================== */
 
-async function loadConversations() {
+  async function startConversation(otherUserId, otherUserName) {
+
+  if (!currentUser || !otherUserId) return;
+
+  const messagesButton = document.querySelector('[data-page="messages"]');
+
+  if (messagesButton) messagesButton.click();
+
+  await openConversation(Number(otherUserId), otherUserName || "SkillSwap partner");
+
+  }
+
+
+  /* ===================================================== */
+  /* MESSAGES: LOAD CONVERSATION LIST (INBOX) */
+  /* ===================================================== */
+
+  async function loadConversations() {
 
     const list =
         document.getElementById(
